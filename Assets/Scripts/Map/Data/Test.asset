@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f67c94316303c7c4dae6341477b1a9d1, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  Width: 13
+  Height: 14
+  Scale: 2
+  PrefabEarth: {fileID: -7393075572160980876, guid: fb58b12b887c73d46a8afa6cf0012782,
+    type: 3}
+  PrefabShores: {fileID: 4619365356942325975, guid: 552d15d75b4973e4d9c2451bf45c46d2,
+    type: 3}
+  PrefabWater: {fileID: 3004049729450051665, guid: f68b71a4f8f2013418c652297fc73b86,
+    type: 3}
