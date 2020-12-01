@@ -7,7 +7,6 @@ namespace NikolayKorobov
 {
     public static class GraphNeighborExtension
     {
-
         /// <summary>
         /// Создать граф из сосдних вершин
         /// </summary>

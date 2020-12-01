@@ -6,15 +6,22 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Persone", menuName = "Data/Player/Persone")]
 public class Persone : Player
 {
-    private List<SelectMap> _listSelected = new List<SelectMap>();
-    private int _indexObject = 0;
+    private Champion _curentChampion = null;
     private Tile _currentTile = null;
-
+    private List<SelectMap> _listSelected = new List<SelectMap>();
+    
     public override void Create(Map map)
     {
         base.Create(map);
 
-        _cameraMove.LookAtTile(Builds.Find(b => b is Castle).GetComponentInParent<Tile>());
+        _cameraMove.LookAtTile(Builds.Find(b => b is Castle).Tile);
+        _currentTile = Builds[0].Tile;
+    }
+
+    public override void Refresh()
+    {
+        base.Refresh();
+        ClearSelected();
     }
 
     public override void Move()
@@ -31,34 +38,37 @@ public class Persone : Player
                     ClearSelected();
 
                     var tile = hit.transform.GetComponent<Tile>();
-                    var actors = tile.GetComponentsInChildren<Actor>();
+                    var champion = tile.GetComponentInChildren<Champion>();
 
-                    if (_currentTile == tile)
-                    {
-                        _indexObject++;
-                        if (_indexObject > actors.Length - 1)
-                            _indexObject = 0;
-                    }
+
+                    // Если выбран пустой тайл
+                    if (champion is null)
+                        _listSelected.Add(tile.Select(_map.PrefabSelect.ColorSelectTile));
+                    
+                    // Если выбран чемпион
                     else
                     {
-                        _indexObject = 0;
-                        _currentTile = tile;
+                        if (champion.Player.Equals(this))
+                        {
+                            // Установить активного чемпиона
+                            _curentChampion = champion;
+                            _listSelected.AddRange(champion.Select());
+                        }
                     }
 
+                    // Если выбран чепион и сделан ход
+                    if (_curentChampion != null && _currentTile != tile)
+                    {
+                        _curentChampion.Move(tile);
+                    }
 
-                    if (actors.Length.Equals(0))
-                        _listSelected.Add(_currentTile.Select(_map.PrefabSelect.ColorSelectTile));
-
-                    else
-                        if (actors[_indexObject].Player.Equals(this))
-                            _listSelected.AddRange(actors[_indexObject].Select());
-
+                    _currentTile = tile;
                 }
             }
         }
     }
 
-    private void ClearSelected()
+    public void ClearSelected()
     {
         _listSelected.ForEach(select => Destroy(select.gameObject));
         _listSelected.Clear();

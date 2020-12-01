@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace NikolayKorobov
@@ -11,6 +12,9 @@ namespace NikolayKorobov
     /// <typeparam name="T">Тип имени вершин</typeparam>
     public class Graph<T>
     {
+
+        public List<Vertex<T>> Vertices => new List<Vertex<T>>(_vertices);
+
         private List<Vertex<T>> _vertices;
 
         /// <summary>
@@ -70,10 +74,15 @@ namespace NikolayKorobov
         /// </summary>
         /// <param name="soughtVertex">Искомая вершина</param>
         /// <returns>Если вершина с именем пресутсвует то вернуть ее</returns>
-        public Vertex<T> FindVertex(T soughtVertex)
-        {
-            return _vertices.Find(v => v.Name.Equals(soughtVertex));
-        }
+        public Vertex<T> FindVertex(T soughtVertex) =>
+            _vertices.Find(v => v.Name.Equals(soughtVertex));
+
+        /// <summary>
+        /// Получить имена всех вершин в графе
+        /// </summary>
+        /// <returns>Лист имен</returns>
+        public List<T> VerticesToNames =>
+            _vertices.Select(v => v.Name).ToList();
 
         /// <summary>
         /// Получить вершину
@@ -90,26 +99,10 @@ namespace NikolayKorobov
             return vertex;
         }
 
-        /// <summary>
-        /// Получить имена всех вершин в графе
-        /// </summary>
-        /// <returns>Лист имен</returns>
-        public List<T> VerticesToNames()
-        {
-            var names = new List<T>();
-
-            _vertices.ForEach(v => names.Add(v.Name));
-
-            return names;
-        }
-
         public override string ToString()
         {
             var message = "";
-
-            foreach (var vertex in _vertices)
-                message += $"Vertex: {vertex} \n";
-
+            _vertices.ForEach(v => message += $"Vertex: {v} \n");
             return message;
         }
     }

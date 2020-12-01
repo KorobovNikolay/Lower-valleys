@@ -128,7 +128,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Warrior
+  _speed: 10
   _weightMove: 2
+  _weightAttack: 1
+  _isMoveOnWater: 0
 --- !u!1001 &1465024918155981135
 PrefabInstance:
   m_ObjectHideFlags: 0

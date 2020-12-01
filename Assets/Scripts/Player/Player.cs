@@ -36,8 +36,14 @@ public abstract class Player : ScriptableObject
         var tilesField = _map.GetTiles<Field>();
         var tileCreateObject = tilesField[Random.Range(0, tilesField.Count)];
             
-        AddObject<Castle>(tileCreateObject);
+        AddBuild<Castle>(tileCreateObject);
         AddChampion<ChampionLevel1>(tileCreateObject);
+    }
+
+    public virtual void Refresh()
+    {
+        Champions.ForEach(ch => ch.Refresh());
+        Builds.ForEach(b => b.Refresh());
     }
 
     public abstract void Move();
@@ -50,7 +56,7 @@ public abstract class Player : ScriptableObject
         Champions.Add(champion);
     }
 
-    public void AddObject<T>(Tile tile)
+    public void AddBuild<T>(Tile tile)
     {
         var build = Instantiate(_builds.Find(b => b is T));
             build.Create(this, tile);

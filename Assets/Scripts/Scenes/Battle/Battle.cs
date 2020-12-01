@@ -18,6 +18,7 @@ public class Battle : MonoBehaviour
         if (index > _players.Count - 1) index = 0;
 
         _currentPlayer = _players[index];
+        _currentPlayer.Refresh();
     }
 
     private void Start()

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Actor : MonoBehaviour
+public abstract class Actor : MonoBehaviour
 {
     [SerializeField] private string _name = "Name actor";
 
     public string Name => _name;
     public Player Player { get; set; }
-    public Tile Tile { get; private set; }
+    public Tile Tile { get; set; }
     
     protected Map _map;
 
@@ -22,11 +22,18 @@ public class Actor : MonoBehaviour
         transform.SetParent(Tile.transform);
     }
 
-    public virtual List<SelectMap> Select()
+    public void ChangeTile(Tile tile)
     {
-        return new List<SelectMap>()
-        {
-            Tile.Select(_map.PrefabSelect.ColorSelectObject)
-        };
+        Tile = tile;
+        transform.position = Tile.transform.position;
+        transform.SetParent(Tile.transform);
     }
+
+    public abstract void Refresh();
+
+    public abstract void Move(Tile tile);
+
+    public abstract List<SelectMap> Select();
+
+    
 }

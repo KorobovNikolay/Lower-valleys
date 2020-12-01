@@ -5,6 +5,8 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     public Vector3 Coordinate { get; set; }
+    public Build Build => GetComponentInChildren<Build>();
+    public Champion Champion => GetComponentInChildren<Champion>();
 
     protected Map _map;
     protected MeshFilter _meshFilter;

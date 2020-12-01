@@ -16,7 +16,7 @@ public class Map : MonoBehaviour
 
     public DataMap Data => _data;
     public SelectMap PrefabSelect => _prefabSelect;
-    public GraphMap Graph;  
+    public Graph<Tile> Graph { get; private set; } 
     public List<Tile> Tiles { get; private set; }
 
     private PerlinNoise _noise;
@@ -61,7 +61,23 @@ public class Map : MonoBehaviour
             }
         }
 
-        Graph = new GraphMap(Tiles);
+        CreateGraph();
+    }
+
+    private void CreateGraph()
+    {
+        Graph = new Graph<Tile>();
+
+        // Создание вершин
+        Tiles.ForEach(tile => Graph.AddVertex(tile));
+
+
+        // Создание ребер
+        Tiles
+            .ForEach(tile => tile.Neighbor()
+            .Where(tileNeighbor => tileNeighbor != null)
+            .ToList()
+            .ForEach(tileConnected => Graph.AddUndirectedEdge(tile, tileConnected, 1)));
     }
 
     private Vector3 CreateCoordinate(int column, int row)
