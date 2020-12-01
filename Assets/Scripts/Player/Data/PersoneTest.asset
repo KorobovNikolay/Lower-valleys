@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff11f085bc98bfc429ebbe828adac353, type: 3}
-  m_Name: TestPlayer
+  m_Name: PersoneTest
   m_EditorClassIdentifier: 
-  _name: Name player
+  _name: Nikolay
   _builds:
   - {fileID: 3837148775737165614, guid: 0665cb2c47b5d2e43b6132fcef8572f5, type: 3}
   _champions:

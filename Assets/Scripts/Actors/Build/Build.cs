@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Castle : Build
+public class Build : Actor
 {
 }

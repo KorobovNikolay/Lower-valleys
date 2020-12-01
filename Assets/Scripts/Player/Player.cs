@@ -43,14 +43,14 @@ public abstract class Player : ScriptableObject
     {
         var champion = Instantiate(_champions.Find(ch => ch is T));
             champion.transform.position = new Vector3(tile.transform.position.x, champion.transform.position.y, tile.transform.position.z + champion.transform.position.z);
-            champion.Tile = tile;
+            champion.transform.SetParent(tile.transform);
     }
 
     public void AddObject<T>(Tile tile)
     {
         var build = Instantiate(_builds.Find(b => b is T));
-            build.Tile = tile;
             build.transform.position = tile.transform.position;
+            build.transform.SetParent(tile.transform);
     }
 
     

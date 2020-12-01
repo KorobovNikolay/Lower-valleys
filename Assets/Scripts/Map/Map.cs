@@ -8,17 +8,16 @@ using UnityEngine;
 public class Map : MonoBehaviour
 {
     [Header("Данные карты")]
-    public DataMap Data;
+    [SerializeField] private DataMap _data = null;
 
     [Header("Выделения на карте")]
     [Space]
-    public Color ColorSelectTile;
-    public Color ColorSelectObject;
-    public Color ColorSelectAtack;
-    public GameObject PrefabSelect = null;
+    [SerializeField] private SelectMap _prefabSelect = null;
 
+    public DataMap Data => _data;
+    public SelectMap PrefabSelect => _prefabSelect;
+    public GraphMap Graph;  
     public List<Tile> Tiles { get; private set; }
-    public GraphMap Graph;
 
     private PerlinNoise _noise;
 

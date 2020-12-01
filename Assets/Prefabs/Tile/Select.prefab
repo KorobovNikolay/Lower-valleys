@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 6361710079356073364}
   - component: {fileID: 8063288355414440497}
   - component: {fileID: 5188843037141602043}
+  - component: {fileID: 2577175915082407294}
   m_Layer: 0
-  m_Name: SelectTile
+  m_Name: Select
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,3 +80,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &2577175915082407294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5981489696821882670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a8c03ce997a4334eac3eb6271053240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorSelectTile: {r: 1, g: 1, b: 1, a: 0}
+  _colorSelectObject: {r: 0.2891153, g: 0.51679397, b: 0.8396226, a: 0}
+  _colorSelectAtack: {r: 0.8301887, g: 0.20754717, b: 0.20754717, a: 0}

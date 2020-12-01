@@ -30,7 +30,7 @@ public class Tile : MonoBehaviour
         name = Coordinate.ToString();
     }
 
-    public GameObject Select(Color color)
+    public SelectMap Select(Color color)
     {
         var offsetUp = 0.05f;
         var position = new Vector3(transform.position.x, transform.position.y + offsetUp, transform.position.z);
@@ -77,7 +77,7 @@ public class Tile : MonoBehaviour
 
     public Tile NeighborDownLeft()
     {
-        return Neighbor(new Vector3(0, -1, -1));
+        return Neighbor(new Vector3(0, -1, 1));
     }
 
     public Tile NeighborUpLeft()

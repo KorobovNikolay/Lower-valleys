@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Wigwam
+  _territory: 1
 --- !u!1 &7173711115172750681
 GameObject:
   m_ObjectHideFlags: 0
