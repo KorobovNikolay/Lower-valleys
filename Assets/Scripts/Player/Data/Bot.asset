@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff11f085bc98bfc429ebbe828adac353, type: 3}
-  m_Name: PersoneTest
+  m_Script: {fileID: 11500000, guid: d420a72cc9e3c6a40bf1072890d50720, type: 3}
+  m_Name: Bot
   m_EditorClassIdentifier: 
-  _name: Nikolay
+  _name: Bot Piter
   _builds:
   - {fileID: 3837148775737165614, guid: 0665cb2c47b5d2e43b6132fcef8572f5, type: 3}
   _champions:

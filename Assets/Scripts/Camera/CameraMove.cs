@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,9 @@ public class CameraMove : MonoBehaviour
 
     public void LookAtTile(Tile tile)
     {
+        if (tile == null)
+            throw new NullReferenceException("параметр tile не должен быть null");
+
         transform.position = new Vector3(tile.transform.position.x, transform.position.y, tile.transform.position.z);
     }
 

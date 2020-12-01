@@ -1,38 +1,31 @@
 ﻿using NikolayKorobov;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GraphMap
 {
-    private List<Tile> _tiles;
     private Graph<Tile> _graph;
 
     public GraphMap(List<Tile> tiles)
     {
-        _tiles = tiles;
         _graph = new Graph<Tile>();
 
         // Создание вершин
-        foreach (var tile in _tiles)
-            _graph.AddVertex(tile);
+        tiles.ForEach(tile => _graph.AddVertex(tile));
 
+        
         // Создание ребер
-        foreach (var tile in _tiles)
-        {
-            foreach (var coordinate in tile.Neighbor())
-            {
-                var connectedTile = _tiles.Find(t => t.Coordinate.Equals(coordinate));
-
-                if (connectedTile != null)
-                    _graph.AddUndirectedEdge(tile, connectedTile, 1);
-
-            }
-        }
+        tiles
+            .ForEach(tile => tile.Neighbor()
+            .Where(tileNeighbor => tileNeighbor != null)
+            .ToList()
+            .ForEach(tileConnected => _graph.AddUndirectedEdge(tile, tileConnected, 1)));
     }
 
-    public List<Tile> NeighborTile(Tile tile)
+    public List<Tile> NeighborByWeightTile(Tile tile, int depth)
     {
-        return _graph.Neighbor(tile, 1).VerticesToNames();
+        return _graph.Neighbor(tile, depth).VerticesToNames();
     }
 }

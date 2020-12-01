@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Battle : MonoBehaviour
 {
-    [SerializeField] private List<Player> _playersPrefab = null;
     [SerializeField] private int _indexPlayer = 0;
-
+    [SerializeField] private List<Player> _playersPrefab = null;
+    
     private List<Player> _players;
     private Player _currentPlayer;
     private Map _map;   
@@ -15,7 +15,7 @@ public class Battle : MonoBehaviour
     public void NextPlayer()
     {
         var index = _players.IndexOf(_currentPlayer) + 1;
-        if (index > _players.Count) index = 0;
+        if (index > _players.Count - 1) index = 0;
 
         _currentPlayer = _players[index];
     }

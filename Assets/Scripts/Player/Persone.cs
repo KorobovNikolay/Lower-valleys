@@ -10,7 +10,14 @@ public class Persone : Player
     private int _indexObject = 0;
     private Tile _currentTile = null;
 
-    public override bool Move()
+    public override void Create(Map map)
+    {
+        base.Create(map);
+
+        _cameraMove.LookAtTile(Builds.Find(b => b is Castle).GetComponentInParent<Tile>());
+    }
+
+    public override void Move()
     {
         RaycastHit hit;
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
@@ -43,12 +50,12 @@ public class Persone : Player
                         _listSelected.Add(_currentTile.Select(_map.PrefabSelect.ColorSelectTile));
 
                     else
-                        _listSelected.AddRange(actors[_indexObject].Select());
+                        if (actors[_indexObject].Player.Equals(this))
+                            _listSelected.AddRange(actors[_indexObject].Select());
+
                 }
             }
         }
-
-        return false;
     }
 
     private void ClearSelected()

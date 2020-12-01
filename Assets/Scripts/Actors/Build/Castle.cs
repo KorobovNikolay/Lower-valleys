@@ -11,7 +11,7 @@ public class Castle : Build
 
     public override List<SelectMap> Select()
     {
-        var tiles = _tile.Neighbor();
+        var tiles = _map.Graph.NeighborByWeightTile(Tile, Territory);
         var selects = new List<SelectMap>();
 
         tiles

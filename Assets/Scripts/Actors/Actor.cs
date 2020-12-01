@@ -7,23 +7,26 @@ public class Actor : MonoBehaviour
     [SerializeField] private string _name = "Name actor";
 
     public string Name => _name;
-
-    protected Tile _tile;
+    public Player Player { get; set; }
+    public Tile Tile { get; private set; }
+    
     protected Map _map;
+
+    public virtual void Create(Player player, Tile tile)
+    {
+        Player = player;
+        Tile = tile;
+        _map = FindObjectOfType<Map>();
+
+        transform.position = Tile.transform.position;
+        transform.SetParent(Tile.transform);
+    }
 
     public virtual List<SelectMap> Select()
     {
         return new List<SelectMap>()
         {
-            _tile.Select(_map.PrefabSelect.ColorSelectObject)
+            Tile.Select(_map.PrefabSelect.ColorSelectObject)
         };
     }
-
-    private void Start()
-    {
-        _tile = GetComponentInParent<Tile>();
-        _map = FindObjectOfType<Map>();
-    }
-
-    
 }

@@ -17,6 +17,8 @@ public abstract class Player : ScriptableObject
     [SerializeField] private List<Champion> _champions = null;
 
     public string Name => _name;
+    public List<Build> Builds { get; private set; }
+    public List<Champion> Champions { get; private set; }
 
     protected CameraMove _cameraMove;
     protected Camera _camera;
@@ -28,29 +30,32 @@ public abstract class Player : ScriptableObject
         _camera = FindObjectOfType<Camera>();
         _map = map;
 
+        Builds = new List<Build>();
+        Champions = new List<Champion>();
+
         var tilesField = _map.GetTiles<Field>();
         var tileCreateObject = tilesField[Random.Range(0, tilesField.Count)];
             
         AddObject<Castle>(tileCreateObject);
         AddChampion<ChampionLevel1>(tileCreateObject);
-
-        _cameraMove.LookAtTile(tileCreateObject);
     }
 
-    public abstract bool Move();
+    public abstract void Move();
 
     public void AddChampion<T>(Tile tile)
     {
         var champion = Instantiate(_champions.Find(ch => ch is T));
-            champion.transform.position = new Vector3(tile.transform.position.x, champion.transform.position.y, tile.transform.position.z + champion.transform.position.z);
-            champion.transform.SetParent(tile.transform);
+            champion.Create(this, tile);
+
+        Champions.Add(champion);
     }
 
     public void AddObject<T>(Tile tile)
     {
         var build = Instantiate(_builds.Find(b => b is T));
-            build.transform.position = tile.transform.position;
-            build.transform.SetParent(tile.transform);
+            build.Create(this, tile);
+
+        Builds.Add(build);
     }
 
     
